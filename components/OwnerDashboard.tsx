@@ -494,10 +494,10 @@ export function OwnerDashboard() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-softpink px-3.5 py-1 text-[11px] font-bold text-maroon border border-gold/40 mb-2">
             <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-            <span>Aaj {stats.aajCustomerAaye} Customer Aaye</span>
+            <span>{stats.aajCustomerAaye} Clients Visited Today</span>
           </div>
           <h1 className="font-serif text-2xl sm:text-4xl font-extrabold text-maroon tracking-tight">
-            {shopProfile.name} — Owner Command Center
+            {shopProfile.name} — Executive Command Center
           </h1>
           <p className="mt-1 text-xs sm:text-sm text-charcoal/75">
             &ldquo;{shopProfile.tagline}&rdquo;
@@ -528,7 +528,7 @@ export function OwnerDashboard() {
             className="py-1.5 px-3.5 text-xs"
           >
             <CssPlusIcon />
-            <span>Add Kapda</span>
+            <span>Add Product</span>
           </BoutiqueButton>
           <BoutiqueButton
             variant="outline"
@@ -536,7 +536,7 @@ export function OwnerDashboard() {
             className="py-1.5 px-3.5 text-xs"
           >
             <CssPlusIcon />
-            <span>Add Udhaar</span>
+            <span>Add Credit</span>
           </BoutiqueButton>
           <BoutiqueButton
             variant="gold"
@@ -557,7 +557,7 @@ export function OwnerDashboard() {
         >
           <div className="flex items-center justify-between">
             <span className="text-xs uppercase tracking-widest text-gold-soft font-semibold">
-              Aaj Ki Sale
+              Today&apos;s Revenue
             </span>
             <CssChartIcon className="text-gold-shine" />
           </div>
@@ -587,7 +587,7 @@ export function OwnerDashboard() {
 
         <BoutiqueCard className="lg:col-span-3" delay={0.1}>
           <span className="text-xs uppercase tracking-widest text-gold font-bold">
-            Is Mahine Ki Sale
+            Monthly Revenue
           </span>
           <p className="mt-3 font-serif text-3xl font-extrabold text-maroon">
             <CountUpNumber value={stats.isMahineKiSale} prefix="₹" />
@@ -603,14 +603,14 @@ export function OwnerDashboard() {
             <CountUpNumber value={stats.totalCustomers} />
           </p>
           <p className="mt-2 text-xs font-semibold text-green-700">
-            +<CountUpNumber value={stats.nayeCustomer} /> Naye Is Mahine
+            +<CountUpNumber value={stats.nayeCustomer} /> New This Month
           </p>
         </BoutiqueCard>
 
         <BoutiqueCard className="lg:col-span-3" delay={0.2}>
           <div className="flex items-center justify-between">
             <span className="text-xs uppercase tracking-widest text-maroon font-bold">
-              Udhaar & Low Stock
+              Credit & Low Stock
             </span>
             <CssAlertIcon className="text-red-600" />
           </div>
@@ -632,7 +632,7 @@ export function OwnerDashboard() {
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <BoutiqueCard className="p-4">
           <span className="text-[11px] font-bold uppercase text-gold">
-            Aaj Ki Leads
+            Today&apos;s Leads
           </span>
           <p className="font-serif text-2xl sm:text-3xl font-extrabold text-maroon mt-1">
             <CountUpNumber value={leadSummary.todayLeads} />
@@ -640,7 +640,7 @@ export function OwnerDashboard() {
         </BoutiqueCard>
         <BoutiqueCard className="p-4">
           <span className="text-[11px] font-bold uppercase text-red-600">
-            Follow-up Pending Aaj
+            Pending Follow-ups Today
           </span>
           <p className="font-serif text-2xl sm:text-3xl font-extrabold text-red-600 mt-1">
             <CountUpNumber value={leadSummary.pendingFollowups} />
@@ -648,7 +648,7 @@ export function OwnerDashboard() {
         </BoutiqueCard>
         <BoutiqueCard className="p-4">
           <span className="text-[11px] font-bold uppercase text-gold">
-            Mahine Leads → PAKKI
+            Monthly Leads &rarr; Won
           </span>
           <p className="font-serif text-2xl sm:text-3xl font-extrabold text-maroon mt-1">
             {leadSummary.monthlyLeads} → {leadSummary.monthlyPakki}
@@ -739,7 +739,7 @@ export function OwnerDashboard() {
           <div className="flex items-center gap-2 mb-3">
             <CssBellIcon className="text-maroon" />
             <h2 className="font-serif text-lg font-bold text-maroon">
-              Aaj Ke Smart Alerts
+              Today&apos;s Priority Alerts
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -844,32 +844,32 @@ export function OwnerDashboard() {
                 {[
                   {
                     title: "Leads & Follow-ups",
-                    desc: `${leadSummary.todayLeads} Aaj ki leads • ${leadSummary.pendingFollowups} pending`,
+                    desc: `${leadSummary.todayLeads} leads today • ${leadSummary.pendingFollowups} pending`,
                     tab: "Leads" as TabKey,
                   },
                   {
                     title: "Kanban Pipeline",
-                    desc: `${leadSummary.monthlyPakki} Deals PAKKI is mahine`,
+                    desc: `${leadSummary.monthlyPakki} deals won this month`,
                     tab: "Pipeline" as TabKey,
                   },
                   {
                     title: "Customers 360°",
-                    desc: `${stats.totalCustomers} Total • VIP & Inactive alerts`,
+                    desc: `${stats.totalCustomers} total • VIP & inactive alerts`,
                     tab: "Customers" as TabKey,
                   },
                   {
                     title: "Stock & Inventory",
-                    desc: `${stats.lowStockCount} Low Stock items dhyan dene wale`,
+                    desc: `${stats.lowStockCount} low-stock alerts requiring attention`,
                     tab: "Stock" as TabKey,
                   },
                   {
-                    title: "Udhaar Register",
-                    desc: `${formatINR(stats.udhaarBaki)} vasooli baki hai`,
+                    title: "Credit Ledger",
+                    desc: `${formatINR(stats.udhaarBaki)} pending receivables`,
                     tab: "Udhaar" as TabKey,
                   },
                   {
                     title: "Reports & Analytics",
-                    desc: `Aaj ki Sale ${formatINR(stats.aajKiSale)}`,
+                    desc: `Today's revenue ${formatINR(stats.aajKiSale)}`,
                     tab: "Reports" as TabKey,
                   },
                 ].map((card) => (
@@ -1038,7 +1038,7 @@ export function OwnerDashboard() {
                 </h3>
                 <BoutiqueButton onClick={() => setAddProductOpen(true)}>
                   <CssPlusIcon />
-                  <span>Naya Kapda Add Karein</span>
+                  <span>Add New Product</span>
                 </BoutiqueButton>
               </div>
 
@@ -1168,7 +1168,7 @@ export function OwnerDashboard() {
               <div className="flex justify-end">
                 <BoutiqueButton onClick={() => setAddStaffOpen(true)}>
                   <CssUserIcon />
-                  <span>Naya Staff Add Karein</span>
+                  <span>Add New Staff</span>
                 </BoutiqueButton>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -1279,21 +1279,21 @@ export function OwnerDashboard() {
                       }}
                     >
                       <CssDiamondIcon />
-                      <span>Diwali Offer Bhejo</span>
+                      <span>Send Festive Offer</span>
                     </BoutiqueButton>
 
                     <BoutiqueButton
                       variant="gold"
                       onClick={() => {
                         const t =
-                          "Happy Birthday Didi! Priya Boutique Nathdwara ki taraf se aapko khaas 20% Birthday Gift OFF!";
+                          "Happy Birthday! Priya Boutique Nathdwara wishes you a wonderful year ahead — enjoy 20% OFF on your birthday visit!";
                         setMarketingTitle("Birthday Offer");
                         setMarketingTemplate(t);
                         handleSendCampaign("Birthday Offer", t);
                       }}
                     >
                       <CssCrownIcon />
-                      <span>Birthday Offer Bhejo</span>
+                      <span>Send Birthday Offer</span>
                     </BoutiqueButton>
 
                     <BoutiqueButton
@@ -1407,11 +1407,11 @@ export function OwnerDashboard() {
             <BoutiqueCard>
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                 <h3 className="font-serif text-xl font-bold text-maroon">
-                  Udhaar Vasooli Register
+                  Credit (Udhaar) Ledger
                 </h3>
                 <BoutiqueButton onClick={() => setAddUdhaarOpen(true)}>
                   <CssPlusIcon />
-                  <span>Naya Udhaar Add Karein</span>
+                  <span>Add Credit Entry</span>
                 </BoutiqueButton>
               </div>
               <div className="overflow-x-auto">
@@ -1487,11 +1487,11 @@ export function OwnerDashboard() {
             <BoutiqueCard>
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                 <h3 className="font-serif text-xl font-bold text-maroon">
-                  Silai & Measurement Diary
+                  Tailoring & Measurement Diary
                 </h3>
                 <BoutiqueButton onClick={() => setAddMeasOpen(true)}>
                   <CssPlusIcon />
-                  <span>Naya Measurement</span>
+                  <span>New Measurement</span>
                 </BoutiqueButton>
               </div>
               <div className="overflow-x-auto">

@@ -188,7 +188,7 @@ export function LeadsWorkspace({
                 Leads Management ({filteredLeads.length})
               </h3>
               <p className="text-xs text-charcoal/70">
-                Kisi bhi lead par click karke poori baat-cheet history dekhein
+                Click any lead to view complete conversation history and follow-ups
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -200,13 +200,13 @@ export function LeadsWorkspace({
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Naam / Phone se dhoondo..."
+                  placeholder="Search by name or phone..."
                   className="rounded-full border border-gold/40 bg-ivory py-1.5 pl-9 pr-4 text-xs outline-none focus:border-maroon"
                 />
               </div>
               <BoutiqueButton onClick={() => setAddLeadOpen(true)} className="py-1.5 text-xs">
                 <CssPlusIcon />
-                <span>Nayi Lead</span>
+                <span>New Lead</span>
               </BoutiqueButton>
             </div>
           </div>
@@ -218,7 +218,7 @@ export function LeadsWorkspace({
               onChange={(e) => setSourceFilter(e.target.value)}
               className="rounded-full border border-gold/40 bg-ivory px-3 py-1 text-xs font-semibold text-maroon outline-none"
             >
-              <option value="All">Source: Sabhi</option>
+              <option value="All">Source: All</option>
               {["Instagram DM", "WhatsApp", "Website", "Call", "Walk-in"].map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -231,7 +231,7 @@ export function LeadsWorkspace({
               onChange={(e) => setStageFilter(e.target.value)}
               className="rounded-full border border-gold/40 bg-ivory px-3 py-1 text-xs font-semibold text-maroon outline-none"
             >
-              <option value="All">Stage: Sabhi</option>
+              <option value="All">Stage: All</option>
               {STAGES.map((st) => (
                 <option key={st} value={st}>
                   {st}
@@ -255,8 +255,8 @@ export function LeadsWorkspace({
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-gold/35 text-xs uppercase text-maroon">
-                  <th className="py-3 px-3">Naam & Phone</th>
-                  <th className="py-3 px-3">Source & Query</th>
+                  <th className="py-3 px-3">Name & Phone</th>
+                  <th className="py-3 px-3">Source & Inquiry</th>
                   <th className="py-3 px-3">Quote</th>
                   <th className="py-3 px-3">Stage & Score</th>
                   <th className="py-3 px-3">Follow-up / Team</th>
@@ -337,11 +337,11 @@ export function LeadsWorkspace({
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <p className="text-xs font-semibold text-maroon">
-              Lead card ko drag karke agle stage me daalein (NEW → BAAT HUI → QUOTE → PAKKI → LOST)
+              Drag any lead card to move across pipeline stages (NEW &rarr; CONTACTED &rarr; QUOTED &rarr; WON &rarr; LOST)
             </p>
             <BoutiqueButton onClick={() => setAddLeadOpen(true)} className="py-1.5 text-xs">
               <CssPlusIcon />
-              <span>Nayi Lead</span>
+              <span>New Lead</span>
             </BoutiqueButton>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -429,7 +429,7 @@ export function LeadsWorkspace({
             <div className="flex items-center gap-2 mb-3">
               <CssAlertIcon className="text-red-600" />
               <h3 className="font-serif text-lg font-bold text-red-700">
-                Missed Follow-ups (Kal Karna Tha)
+                Missed Follow-ups (Overdue)
               </h3>
             </div>
             <div className="space-y-3">
@@ -466,7 +466,7 @@ export function LeadsWorkspace({
             <div className="flex items-center gap-2 mb-3">
               <CssDocIcon className="text-amber-700" />
               <h3 className="font-serif text-lg font-bold text-amber-900">
-                Quote Bheje 3 Din Ho Gaye
+                Quote Sent 3 Days Ago
               </h3>
             </div>
             <div className="space-y-3">
@@ -500,7 +500,7 @@ export function LeadsWorkspace({
             <div className="flex items-center gap-2 mb-3">
               <CssUserIcon className="text-maroon" />
               <h3 className="font-serif text-lg font-bold text-maroon">
-                Aaj Kisko Call Karna Hai
+                Today&apos;s Scheduled Calls
               </h3>
             </div>
             <div className="space-y-3">
@@ -683,13 +683,13 @@ export function LeadsWorkspace({
       <BoutiqueModal
         open={addLeadOpen}
         onClose={() => setAddLeadOpen(false)}
-        title="Nayi Lead Add Karein"
+        title="Add New Lead"
       >
         <form onSubmit={handleCreateLead} className="space-y-3">
           <input
             type="text"
             required
-            placeholder="Customer Naam *"
+            placeholder="Client Name *"
             value={leadForm.naam}
             onChange={(e) => setLeadForm((f) => ({ ...f, naam: e.target.value }))}
             className="w-full rounded-full border border-gold/40 bg-white px-4 py-2 text-sm outline-none"
@@ -776,7 +776,7 @@ export function HinglishAIChatbot() {
     {
       id: "b1",
       sender: "bot",
-      text: "Namaste! Main Priya Boutique ka 24x7 AI Assistant hoon. Hindi, English ya Hinglish me kuch bhi poochein (Lehenga price, Kurti size, Diwali Offer, ya Order Status)!",
+      text: "Hello! I am Priya Boutique's 24x7 AI Concierge. Ask me about bridal lehenga pricing, kurti sizing, festive offers, or order tracking!",
     },
   ]);
 

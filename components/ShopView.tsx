@@ -372,7 +372,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
           className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-semibold text-maroon shadow-sm border border-gold/40 mb-3"
         >
           <span className="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse" />
-          <span>● Aaj 18 Customer Aaye</span>
+          <span>18 Clients Visited Today</span>
         </motion.div>
 
         <motion.h1
@@ -390,7 +390,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="mt-2 text-sm sm:text-base text-charcoal/80 font-medium"
         >
-          &ldquo;Customer Kabhi Nahi Bhoolega, Sale Kabhi Nahi Rukegi&rdquo;
+          &ldquo;Every Client Remembered, Every Sale Elevated&rdquo;
         </motion.p>
       </section>
 
@@ -405,7 +405,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
               type="text"
               value={customerSearch}
               onChange={(e) => setCustomerSearch(e.target.value)}
-              placeholder="Phone se Customer Dhoondo..."
+              placeholder="Search client by phone or name..."
               className="w-full rounded-full border border-gold/45 bg-ivory/75 py-3 pl-11 pr-4 text-sm font-medium outline-none focus:border-maroon focus:ring-2 focus:ring-gold/30 transition-all"
             />
           </div>
@@ -514,10 +514,10 @@ export function ShopView({ staffId }: { staffId?: string }) {
         <BoutiqueCard className="lg:col-span-3">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-serif text-lg font-bold text-maroon">
-              1. Customer Chunein
+              1. Select Client
             </h2>
             <span className="text-xs font-semibold text-gold">
-              {customers.length} mile
+              {customers.length} found
             </span>
           </div>
 
@@ -586,7 +586,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
         <BoutiqueCard className="lg:col-span-5" delay={0.08}>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-serif text-lg font-bold text-maroon">
-              2. Kapde Add Karein
+              2. Add Items
             </h2>
             <span className="text-xs text-charcoal/65">
               {filteredBillingProducts.length} items
@@ -602,7 +602,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
                 type="text"
                 value={billingSearch}
                 onChange={(e) => setBillingSearch(e.target.value)}
-                placeholder="Kapda dhoondo (Kurti, Saree, Lehenga)..."
+                placeholder="Search garment (Kurti, Saree, Lehenga)..."
                 className="w-full rounded-full border border-gold/40 bg-ivory/80 py-1.5 pl-9 pr-4 text-xs outline-none focus:border-maroon"
               />
             </div>
@@ -727,7 +727,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
             {cart.length === 0 ? (
               <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gold/50 py-10 text-center text-xs text-charcoal/60">
                 <CssDiamondIcon className="text-gold mb-2" />
-                <span>Abhi koi kapda add nahi hai</span>
+                <span>No items added to bill yet</span>
               </div>
             ) : (
               <AnimatePresence>
@@ -864,7 +864,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
             >
               <CssDocIcon />
               <span>
-                {submittingBill ? "Bill Ban Raha Hai..." : "Generate Bill"}
+                {submittingBill ? "Generating Invoice..." : "Generate Bill"}
               </span>
             </BoutiqueButton>
           </div>
@@ -880,10 +880,10 @@ export function ShopView({ staffId }: { staffId?: string }) {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
             <div>
               <h2 className="font-serif text-xl font-bold text-maroon">
-                Almirah & Godown Stock Check
+                Live Showroom & Warehouse Stock
               </h2>
               <p className="text-xs text-charcoal/70">
-                Turant dekhein kaunsa size bacha hai — bina almirah khole
+                Instant size-wise availability across showroom & godown
               </p>
             </div>
             <div className="relative w-full sm:w-72">
