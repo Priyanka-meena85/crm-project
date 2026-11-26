@@ -74,14 +74,14 @@ export function MarqueeStrip() {
 /* Gold Line + Small Diamond Icon Divider */
 export function GoldDivider({ label }: { label?: string }) {
   return (
-    <div className="my-6 flex items-center gap-3">
-      <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold/60 to-gold" />
-      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-        <span>◆</span>
+    <div className="my-7 flex items-center gap-4">
+      <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gold/50 to-gold" />
+      <div className="inline-flex items-center gap-2.5 rounded-full bg-white/80 px-4 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-maroon border border-gold/40 shadow-sm">
+        <span className="inline-block h-2 w-2 rotate-45 bg-gold-shine" />
         {label ? <span>{label}</span> : null}
-        {label ? <span>◆</span> : null}
+        {label ? <span className="inline-block h-2 w-2 rotate-45 bg-gold-shine" /> : null}
       </div>
-      <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent via-gold/60 to-gold" />
+      <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent via-gold/50 to-gold" />
     </div>
   );
 }
@@ -272,7 +272,7 @@ export function BoutiqueCard({
         scale: 1.015,
       }}
       className={cn(
-        "rounded-[28px] bg-white/95 backdrop-blur-sm p-5 sm:p-6 shadow-boutique hover:shadow-boutique-hover border border-maroon/10 hover:border-gold transition-colors duration-300",
+        "rounded-[28px] bg-white/90 backdrop-blur-md p-5 sm:p-6 shadow-boutique hover:shadow-boutique-hover border border-gold/25 hover:border-gold ring-1 ring-maroon/5 transition-all duration-300",
         className
       )}
     >

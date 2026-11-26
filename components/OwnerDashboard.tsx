@@ -583,35 +583,23 @@ export function OwnerDashboard() {
 
   return (
     <main className="mx-auto max-w-7xl px-3 sm:px-6 pb-16 pt-4">
-      {/* Hero Header */}
-      <section className="text-center py-6">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-semibold text-maroon shadow-sm border border-gold/40 mb-3"
-        >
-          <span className="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse" />
-          <span>● Aaj {stats.aajCustomerAaye} Customer Aaye</span>
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08 }}
-          className="font-serif text-3xl sm:text-5xl font-extrabold text-maroon"
-        >
-          {shopProfile.name} — Owner Dashboard
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.16 }}
-          className="mt-1.5 text-sm sm:text-base text-charcoal/80"
-        >
-          &ldquo;{shopProfile.tagline}&rdquo;
-        </motion.p>
+      {/* Executive Showroom Banner */}
+      <section className="mb-6 rounded-[28px] bg-white/85 backdrop-blur-md p-5 sm:p-6 shadow-boutique border border-gold/40 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-softpink px-3.5 py-1 text-[11px] font-bold text-maroon border border-gold/40 mb-2">
+            <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+            <span>Aaj {stats.aajCustomerAaye} Customer Aaye</span>
+          </div>
+          <h1 className="font-serif text-2xl sm:text-4xl font-extrabold text-maroon tracking-tight">
+            {shopProfile.name} — Owner Command Center
+          </h1>
+          <p className="mt-1 text-xs sm:text-sm text-charcoal/75">
+            &ldquo;{shopProfile.tagline}&rdquo;
+          </p>
+        </div>
 
         {/* Quick-Action & Module Jump Bar */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <BoutiqueButton
             variant="outline"
             onClick={() => setActiveTab("Leads")}
@@ -626,7 +614,7 @@ export function OwnerDashboard() {
             className="py-1.5 px-3.5 text-xs"
           >
             <CssGridIcon />
-            <span>Kanban Pipeline</span>
+            <span>Pipeline</span>
           </BoutiqueButton>
           <BoutiqueButton
             variant="outline"
@@ -650,7 +638,7 @@ export function OwnerDashboard() {
             className="py-1.5 px-3.5 text-xs"
           >
             <CssPlusIcon />
-            <span>Add Measurement</span>
+            <span>Measurement</span>
           </BoutiqueButton>
         </div>
       </section>
