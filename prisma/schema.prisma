@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  OWNER
+  STAFF
+}
+
+enum ProductCategory {
+  Kurti
+  Saree
+  Lehenga
+  Suit
+  Gown
+}
+
+enum PaymentMethod {
+  Cash
+  UPI
+  Card
+  Udhaar
+}
+
+enum UdhaarStatus {
+  Pending
+  Paid
+}
+
+model Customer {
+  id            String        @id @default(cuid())
+  name          String
+  phone         String        @unique
+  city          String        @default("Nathdwara")
+  birthday      DateTime?
+  anniversary   DateTime?
+  size          String        @default("M")
+  pasand        String        @default("")
+  total_kharida Float         @default(0)
+  last_visit    DateTime      @default(now())
+  is_vip        Boolean       @default(false)
+  is_inactive   Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  bills        Bill[]
+  measurements Measurement[]
+  udhaars      Udhaar[]
+}
+
+model Product {
+  id        String          @id @default(cuid())
+  name      String
+  category  ProductCategory @default(Kurti)
+  price     Float
+  photo_url String          @default("")
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  stocks    Stock[]
+  billItems BillItem[]
+}
+
+model Stock {
+  id                  String   @id @default(cuid())
+  product_id          String
+  size                String
+  quantity            Int      @default(0)
+  low_stock_threshold Int      @default(2)
+  updatedAt           DateTime @updatedAt
+
+  product Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+
+  @@unique([product_id, size])
+}
+
+model Staff {
+  id                 String   @id @default(cuid())
+  name               String
+  phone              String   @unique
+  email              String   @unique
+  passwordHash       String
+  role               UserRole @default(STAFF)
+  target_monthly     Float    @default(100000)
+  commission_percent Float    @default(2)
+  current_sale       Float    @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  bills Bill[]
+}
+
+model Bill {
+  id             String        @id @default(cuid())
+  bill_no        Int           @unique @default(autoincrement())
+  customer_id    String
+  staff_id       String
+  total          Float
+  discount       Float         @default(0)
+  final_total    Float
+  payment_method PaymentMethod @default(UPI)
+  status         String        @default("Paid")
+  createdAt      DateTime      @default(now())
+
+  customer Customer   @relation(fields: [customer_id], references: [id])
+  staff    Staff      @relation(fields: [staff_id], references: [id])
+  items    BillItem[]
+}
+
+model BillItem {
+  id         String @id @default(cuid())
+  bill_id    String
+  product_id String
+  size       String
+  qty        Int
+  price      Float
+
+  bill    Bill    @relation(fields: [bill_id], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [product_id], references: [id])
+}
+
+model Measurement {
+  id            String   @id @default(cuid())
+  customer_id   String
+  blouse        String   @default("")
+  sleeve        String   @default("")
+  length        String   @default("")
+  waist         String   @default("")
+  shoulder      String   @default("")
+  status        String   @default("Measurement Liya")
+  delivery_date DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  customer Customer @relation(fields: [customer_id], references: [id], onDelete: Cascade)
+}
+
+model Udhaar {
+  id          String       @id @default(cuid())
+  customer_id String
+  amount      Float
+  due_date    DateTime
+  status      UdhaarStatus @default(Pending)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  customer Customer @relation(fields: [customer_id], references: [id], onDelete: Cascade)
+}
+
+model MarketingCampaign {
+  id            String   @id @default(cuid())
+  title         String
+  template      String
+  sent_to_count Int      @default(0)
+  createdAt     DateTime @default(now())
+}
