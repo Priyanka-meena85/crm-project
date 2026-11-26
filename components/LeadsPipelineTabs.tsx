@@ -334,89 +334,107 @@ export function LeadsWorkspace({
 
       {/* MODE 2: KANBAN PIPELINE VIEW (5 COLUMNS WITH DRAG & DROP) */}
       {mode === "pipeline" && (
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] bg-white/85 px-4 py-3 border border-gold/35 shadow-sm">
             <p className="text-xs font-semibold text-maroon">
-              Drag any lead card to move across pipeline stages (NEW &rarr; CONTACTED &rarr; QUOTED &rarr; WON &rarr; LOST)
+              Drag any lead card or use quick-move to advance stages (NEW &rarr; BAAT HUI &rarr; QUOTE &rarr; PAKKI &rarr; LOST)
             </p>
-            <BoutiqueButton onClick={() => setAddLeadOpen(true)} className="py-1.5 text-xs">
+            <BoutiqueButton onClick={() => setAddLeadOpen(true)} className="py-1.5 px-4 text-xs shrink-0">
               <CssPlusIcon />
               <span>New Lead</span>
             </BoutiqueButton>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {STAGES.map((stage) => {
-              const stageLeads = leads.filter((l) => l.stage === stage);
-              return (
-                <div
-                  key={stage}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={() => {
-                    if (draggedId) {
-                      handleUpdateLead(draggedId, { stage });
-                      setDraggedId(null);
-                    }
-                  }}
-                  className="rounded-[24px] bg-white/85 border border-gold/35 p-3 min-h-[380px] shadow-sm flex flex-col gap-3"
-                >
-                  <div className="flex items-center justify-between border-b border-gold/25 pb-2">
-                    <span className="font-serif text-sm font-bold text-maroon">
-                      {stage}
-                    </span>
-                    <span className="rounded-full bg-softpink px-2.5 py-0.5 text-xs font-bold text-maroon">
-                      {stageLeads.length}
-                    </span>
-                  </div>
 
-                  <div className="space-y-2.5 flex-1">
-                    {stageLeads.map((lead) => (
-                      <motion.div
-                        layout
-                        key={lead.id}
-                        draggable
-                        onDragStart={() => setDraggedId(lead.id)}
-                        onClick={() => setSelectedLead(lead)}
-                        whileHover={{ y: -3 }}
-                        className="cursor-grab active:cursor-grabbing rounded-2xl bg-ivory p-3 border border-gold/35 shadow-sm hover:border-maroon space-y-1.5"
-                      >
-                        <div className="flex items-start justify-between gap-1">
-                          <p className="font-semibold text-xs text-charcoal">
-                            {lead.naam}
-                          </p>
-                          <ScoreBadge score={lead.score} />
-                        </div>
-                        <p className="text-[11px] text-charcoal/75 line-clamp-2">
-                          {lead.query}
-                        </p>
-                        <div className="flex items-center justify-between text-[11px] pt-1">
-                          <span className="font-bold text-maroon">{lead.quote}</span>
-                          <span className="text-charcoal/65">{lead.assigned_to}</span>
-                        </div>
-                        <div
-                          className="flex flex-wrap gap-1 pt-1"
-                          onClick={(e) => e.stopPropagation()}
+          <div className="overflow-x-auto pb-3 snap-x snap-mandatory">
+            <div className="grid grid-flow-col auto-cols-[235px] xl:auto-cols-[225px] 2xl:grid-flow-row 2xl:grid-cols-5 gap-3.5">
+              {STAGES.map((stage) => {
+                const stageLeads = leads.filter((l) => l.stage === stage);
+                const stageColor =
+                  stage === "NEW"
+                    ? "bg-gold"
+                    : stage === "BAAT HUI"
+                    ? "bg-maroon-light"
+                    : stage === "QUOTE"
+                    ? "bg-amber-500"
+                    : stage === "PAKKI"
+                    ? "bg-green-600"
+                    : "bg-stone-400";
+
+                return (
+                  <div
+                    key={stage}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={() => {
+                      if (draggedId) {
+                        handleUpdateLead(draggedId, { stage });
+                        setDraggedId(null);
+                      }
+                    }}
+                    className="snap-start rounded-[24px] bg-white/90 backdrop-blur-sm border border-gold/35 p-3 min-h-[400px] shadow-sm flex flex-col gap-3 overflow-hidden"
+                  >
+                    <div className={`h-1.5 w-full rounded-full ${stageColor}`} />
+                    <div className="flex items-center justify-between border-b border-gold/25 pb-2">
+                      <span className="font-serif text-xs sm:text-sm font-bold text-maroon tracking-wide">
+                        {stage}
+                      </span>
+                      <span className="rounded-full bg-softpink px-2.5 py-0.5 text-xs font-bold text-maroon border border-gold/25">
+                        {stageLeads.length}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2.5 flex-1">
+                      {stageLeads.map((lead) => (
+                        <motion.div
+                          layout
+                          key={lead.id}
+                          draggable
+                          onDragStart={() => setDraggedId(lead.id)}
+                          onClick={() => setSelectedLead(lead)}
+                          whileHover={{ y: -3 }}
+                          className="cursor-grab active:cursor-grabbing rounded-2xl bg-ivory/90 p-3 border border-gold/35 shadow-sm hover:border-maroon hover:shadow-boutique transition-all space-y-2"
                         >
-                          {STAGES.filter((s) => s !== stage)
-                            .slice(0, 2)
-                            .map((nextSt) => (
-                              <button
-                                key={nextSt}
-                                type="button"
-                                onClick={() =>
-                                  handleUpdateLead(lead.id, { stage: nextSt })
-                                }
-                                className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-maroon border border-gold/35 hover:bg-softpink"
-                              >
-                                → {nextSt}
-                              </button>
-                            ))}
-                        </div>
-                      </motion.div>
-                    ))}
+                          <div className="flex items-center justify-between gap-2 min-w-0">
+                            <p className="font-semibold text-xs text-charcoal truncate">
+                              {lead.naam}
+                            </p>
+                            <ScoreBadge score={lead.score} />
+                          </div>
+                          <p className="text-[11px] text-charcoal/75 line-clamp-2 leading-relaxed">
+                            {lead.query}
+                          </p>
+                          <div className="flex items-center justify-between text-[11px] pt-1 border-t border-gold/20">
+                            <span className="font-bold text-maroon">{lead.quote}</span>
+                            <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-medium text-charcoal/75 border border-gold/25">
+                              {lead.assigned_to}
+                            </span>
+                          </div>
+                          <div
+                            className="pt-0.5"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <select
+                              value={lead.stage}
+                              onChange={(e) =>
+                                handleUpdateLead(lead.id, {
+                                  stage: e.target.value as LeadStage,
+                                })
+                              }
+                              className="w-full rounded-full border border-gold/35 bg-white px-2.5 py-1 text-[10px] font-semibold text-maroon outline-none hover:border-maroon"
+                            >
+                              {STAGES.map((st) => (
+                                <option key={st} value={st}>
+                                  Move: {st}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
