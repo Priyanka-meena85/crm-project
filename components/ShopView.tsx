@@ -291,7 +291,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
 
       setCart([]);
       setDiscount(0);
-      showToast(`Bill Ban Gaya! #${data.bill.bill_no}`);
+      showToast(`Invoice Generated! #${data.bill.bill_no}`);
       loadData();
     } catch {
       showToast("Network error! Bill generate nahi hua.", "error");
@@ -324,7 +324,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
         birthday: "",
         anniversary: "",
       });
-      showToast("Naya Customer Save Ho Gaya!");
+      showToast("New client saved!");
       loadData();
     } catch {
       showToast("Error saving customer.", "error");
@@ -348,7 +348,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
       });
       const data = await res.json();
       if (res.ok) {
-        showToast("Offer Bhej Diya!");
+        showToast("Offer sent!");
         setOfferModalOpen(false);
         if (data.waLink) {
           window.open(data.waLink, "_blank", "noopener,noreferrer");
@@ -983,7 +983,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
       <BoutiqueModal
         open={!!generatedBill}
         onClose={() => setGeneratedBill(null)}
-        title="Bill Ban Gaya!"
+        title="Invoice Generated!"
       >
         {generatedBill && (
           <div className="text-center space-y-4">
@@ -1024,7 +1024,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
       <BoutiqueModal
         open={newCustomerOpen}
         onClose={() => setNewCustomerOpen(false)}
-        title="Naya Customer Jodein"
+        title="Add New Client"
       >
         <form onSubmit={handleCreateCustomer} className="space-y-3.5">
           <div>
@@ -1149,21 +1149,21 @@ export function ShopView({ staffId }: { staffId?: string }) {
       <BoutiqueModal
         open={offerModalOpen}
         onClose={() => setOfferModalOpen(false)}
-        title="WhatsApp Offer Bhejein"
+        title="Send WhatsApp Offer"
       >
         <div className="space-y-4">
           <p className="text-sm text-charcoal/80">
-            Selected Customer:{" "}
-            <strong>{selectedCustomer?.name || "Koi nahi"}</strong> (
+            Selected Client:{" "}
+            <strong>{selectedCustomer?.name || "None"}</strong> (
             {selectedCustomer?.phone || "-"})
           </p>
           <div className="rounded-2xl bg-softpink p-4 text-sm text-maroon border border-gold/40">
-            &ldquo;Namaste {selectedCustomer?.name || "Didi"} ji! Priya Boutique
-            Nathdwara me naya festive stock aaya hai. Aapke liye khaas 15%
-            OFF!&rdquo;
+            &ldquo;Hello {selectedCustomer?.name || "Valued Client"}, new festive
+            arrivals are now live at Priya Boutique Nathdwara! Enjoy an exclusive
+            15% OFF on your next visit.&rdquo;
           </div>
           <WhatsAppButton
-            label="WhatsApp Pe Offer Bhejo"
+            label="Send Offer on WhatsApp"
             onClick={handleSendQuickOffer}
             className="w-full"
           />
@@ -1174,7 +1174,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
       <BoutiqueModal
         open={billHistoryOpen}
         onClose={() => setBillHistoryOpen(false)}
-        title="Purane Bills & Return / Exchange"
+        title="Past Invoices & Returns"
       >
         <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
           {billHistory.length === 0 ? (

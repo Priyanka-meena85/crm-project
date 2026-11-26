@@ -89,7 +89,7 @@ export function LeadsWorkspace({
     quote: "₹3,500",
     score: "Hot" as LeadScore,
     assigned_to: "Ravi",
-    next_followup: "Aaj 5:00 PM",
+    next_followup: "Today 5:00 PM",
   });
 
   // Drag & Drop
@@ -150,7 +150,7 @@ export function LeadsWorkspace({
         quote: "₹3,500",
         score: "Hot",
         assigned_to: "Ravi",
-        next_followup: "Aaj 5:00 PM",
+        next_followup: "Today 5:00 PM",
       });
       loadLeads();
     }
@@ -305,7 +305,7 @@ export function LeadsWorkspace({
                         <a
                           href={buildWhatsAppLink(
                             lead.phone,
-                            `Namaste ${lead.naam} ji! Priya Boutique se ${lead.query} ke baare me baat karni thi.`
+                            `Hello ${lead.naam}, following up from Priya Boutique regarding your inquiry: ${lead.query}.`
                           )}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -337,7 +337,7 @@ export function LeadsWorkspace({
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] bg-white/85 px-4 py-3 border border-gold/35 shadow-sm">
             <p className="text-xs font-semibold text-maroon">
-              Drag any lead card or use quick-move to advance stages (NEW &rarr; BAAT HUI &rarr; QUOTE &rarr; PAKKI &rarr; LOST)
+              Drag any lead card or use quick-move to advance stages (NEW &rarr; CONTACTED &rarr; QUOTE &rarr; WON &rarr; LOST)
             </p>
             <BoutiqueButton onClick={() => setAddLeadOpen(true)} className="py-1.5 px-4 text-xs shrink-0">
               <CssPlusIcon />
@@ -470,7 +470,7 @@ export function LeadsWorkspace({
                       </a>
                       <WhatsAppButton
                         label="WhatsApp"
-                        href={buildWhatsAppLink(l.phone, `Namaste ${l.naam} ji!`)}
+                        href={buildWhatsAppLink(l.phone, `Hello ${l.naam}, following up from Priya Boutique!`)}
                         className="py-1 px-3 text-xs"
                       />
                     </div>
@@ -501,10 +501,10 @@ export function LeadsWorkspace({
                     </div>
                     <p className="text-xs text-charcoal/75">{l.query}</p>
                     <WhatsAppButton
-                      label="Follow-up Karo"
+                      label="Send Follow-up"
                       href={buildWhatsAppLink(
                         l.phone,
-                        `Namaste ${l.naam} ji! Aapko ${l.quote} ka quote bheja tha, kya hum order confirm karein?`
+                        `Hello ${l.naam}, following up on our ${l.quote} quote from Priya Boutique. Would you like to confirm your order?`
                       )}
                       className="py-1 px-3 text-xs"
                     />
@@ -552,7 +552,7 @@ export function LeadsWorkspace({
                       </a>
                       <WhatsAppButton
                         label="WhatsApp"
-                        href={buildWhatsAppLink(l.phone, `Namaste ${l.naam} ji!`)}
+                        href={buildWhatsAppLink(l.phone, `Hello ${l.naam}, following up from Priya Boutique!`)}
                         className="py-1 px-3 text-xs"
                       />
                     </div>
@@ -640,7 +640,7 @@ export function LeadsWorkspace({
             {/* History Timeline */}
             <div>
               <h4 className="font-serif font-bold text-sm text-maroon mb-2">
-                Baat-Cheet History (Staff badle par history safe)
+                Conversation History (Preserved Across Staff Changes)
               </h4>
               <div className="space-y-2 max-h-44 overflow-y-auto pr-1">
                 {selectedLead.history.map((h) => (
@@ -686,7 +686,7 @@ export function LeadsWorkspace({
                 type="text"
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
-                placeholder="Kya baat hui? Note likhein..."
+                placeholder="Log conversation details..."
                 className="flex-1 rounded-full border border-gold/40 bg-white px-3.5 py-1.5 text-xs outline-none"
               />
               <BoutiqueButton type="submit" className="py-1.5 px-4 text-xs">
@@ -801,15 +801,15 @@ export function HinglishAIChatbot() {
   const replyFor = (q: string) => {
     const low = q.toLowerCase();
     if (low.includes("lehenga") || low.includes("rate") || low.includes("price")) {
-      return "Hamare Bridal Red Lehenga ₹15,000 se start hain aur Red Kurti ₹1,200 me available hai. VIP customers ko 20% Diwali OFF mil raha hai!";
+      return "Our Bridal Red Lehengas start at ₹15,000 and Red Kurtis are available at ₹1,200. VIP clients enjoy 20% festive savings!";
     }
     if (low.includes("size") || low.includes("kurti")) {
-      return "Size Chart: S (36), M (38), L (40), XL (42), XXL (44). Custom blouse & alteration stitching 3 din me ready ho jati hai!";
+      return "Size Chart: S (36), M (38), L (40), XL (42), XXL (44). Custom blouse & alteration tailoring is ready within 3 days.";
     }
     if (low.includes("offer") || low.includes("diwali")) {
-      return "Diwali Special Offer: Sabhi VIP aur returning customers ko flat 20% OFF + Free Alteration mil raha hai. Aap apna number dein, hum catalog WhatsApp kar dete hain!";
+      return "Festive Offer: All VIP and returning clients receive flat 20% OFF + complimentary alterations. Share your phone number to receive our latest catalog!";
     }
-    return "Bilkul! Aapka sawal note kar liya hai. Hamari team (Ravi / Neha) 5 minute me aapko WhatsApp par details share karegi. Kya main aapka phone number save kar loon?";
+    return "Thank you for reaching out! Our stylists (Ravi / Neha) will share full details on WhatsApp within 5 minutes. May I confirm your contact number?";
   };
 
   const handleSend = (text: string) => {
@@ -853,7 +853,7 @@ export function HinglishAIChatbot() {
                     Priya AI Assistant (24x7)
                   </p>
                   <p className="text-[10px] text-gold-soft">
-                    Hindi • English • Hinglish
+                    24x7 Concierge • Instant Replies
                   </p>
                 </div>
               </div>
@@ -882,7 +882,7 @@ export function HinglishAIChatbot() {
             </div>
 
             <div className="px-3 pb-2 flex flex-wrap gap-1">
-              {["Lehenga Rate?", "Size Chart?", "Diwali Offer?"].map((q) => (
+              {["Lehenga Price?", "Size Chart?", "Festive Offer?"].map((q) => (
                 <button
                   key={q}
                   type="button"
@@ -905,7 +905,7 @@ export function HinglishAIChatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Hinglish me poochein..."
+                placeholder="Ask a question..."
                 className="flex-1 rounded-full border border-gold/40 bg-ivory px-3 py-1.5 text-xs outline-none"
               />
               <button

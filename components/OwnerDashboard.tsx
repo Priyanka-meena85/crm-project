@@ -111,9 +111,9 @@ export function OwnerDashboard() {
 
   // Marketing State
   const [marketingTemplate, setMarketingTemplate] = useState(
-    "Namaste Didi! Priya Boutique Nathdwara me Diwali New Stock aa gaya hai. VIP customers ke liye 20% OFF — aaj hi padharein!"
+    "Hello! New Festive Arrivals are now live at Priya Boutique Nathdwara. Enjoy 20% VIP savings — visit us today!"
   );
-  const [marketingTitle, setMarketingTitle] = useState("Diwali Offer");
+  const [marketingTitle, setMarketingTitle] = useState("Festive Offer");
   const [lastSentCount, setLastSentCount] = useState(500);
 
   // Modals
@@ -161,7 +161,7 @@ export function OwnerDashboard() {
     name: "Priya Boutique",
     address: "Bada Bazar, Nathdwara, Rajasthan 313301",
     phone: "9829012345",
-    tagline: "Customer Kabhi Nahi Bhoolega, Sale Kabhi Nahi Rukegi",
+    tagline: "Every Client Remembered, Every Sale Elevated",
   });
 
   const loadAll = useCallback(async () => {
@@ -374,7 +374,7 @@ export function OwnerDashboard() {
       body: JSON.stringify(udhaarForm),
     });
     if (res.ok) {
-      showToast("Udhaar Entry Save Ho Gayi!");
+      showToast("Credit entry saved!");
       setAddUdhaarOpen(false);
       setUdhaarForm((f) => ({ ...f, amount: "", due_date: "" }));
       loadAll();
@@ -385,7 +385,7 @@ export function OwnerDashboard() {
     const res = await fetch(`/api/udhaar/${id}/reminder`, { method: "POST" });
     const data = await res.json();
     if (res.ok) {
-      showToast("WhatsApp Reminder Bhej Diya!");
+      showToast("WhatsApp reminder sent!");
       if (data.waLink) window.open(data.waLink, "_blank", "noopener,noreferrer");
     }
   };
@@ -393,7 +393,7 @@ export function OwnerDashboard() {
   const handleMarkPaid = async (id: string) => {
     const res = await fetch(`/api/udhaar/${id}/mark-paid`, { method: "POST" });
     if (res.ok) {
-      showToast("Udhaar Paid Mark Ho Gaya!");
+      showToast("Marked as Paid!");
       loadAll();
     }
   };
@@ -623,7 +623,7 @@ export function OwnerDashboard() {
             </span>
           </div>
           <p className="mt-2 text-xs text-charcoal/65">
-            Time pe vasooli & stock refill
+            Timely collections &amp; inventory restock
           </p>
         </BoutiqueCard>
       </section>
@@ -833,7 +833,7 @@ export function OwnerDashboard() {
                     Showroom Dashboard Overview
                   </h3>
                   <p className="text-xs text-charcoal/70">
-                    Aaj ki highlights aur 1-click module shortcuts
+                    Daily highlights and 1-click module shortcuts
                   </p>
                 </div>
                 <span className="rounded-full bg-softpink px-3 py-1 text-xs font-bold text-maroon border border-gold/35">
@@ -1455,7 +1455,7 @@ export function OwnerDashboard() {
                           {u.status === "Pending" ? (
                             <div className="flex flex-wrap items-center gap-2">
                               <WhatsAppButton
-                                label="Reminder Bhejo"
+                                label="Send Reminder"
                                 onClick={() => handleUdhaarReminder(u.id)}
                                 className="px-3.5 py-1.5 text-xs"
                               />

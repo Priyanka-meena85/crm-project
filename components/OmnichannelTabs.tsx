@@ -268,7 +268,7 @@ export function OmnichannelOrdersTab() {
                     window.open(
                       buildWhatsAppLink(
                         c.phone,
-                        `Namaste ${c.customerName} ji! Aapka ${c.itemName} cart me wait kar raha hai. Abhi order karein aur 10% OFF payein!`
+                        `Hello ${c.customerName}, your ${c.itemName} is still waiting in your cart at Priya Boutique! Complete your order now for 10% OFF.`
                       ),
                       "_blank",
                       "noopener,noreferrer"
