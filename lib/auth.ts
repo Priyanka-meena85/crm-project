@@ -6,24 +6,12 @@ import { demoStore } from "@/lib/demo-store";
 import { checkRateLimit } from "@/lib/security";
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
+  secret:
+    process.env.NEXTAUTH_SECRET ||
+    "priya-boutique-nathdwara-runtime-fallback-secret-2026",
   session: {
     strategy: "jwt",
     maxAge: 8 * 60 * 60, // 8 hours
-  },
-  cookies: {
-    sessionToken: {
-      name:
-        process.env.NODE_ENV === "production"
-          ? "__Secure-next-auth.session-token"
-          : "next-auth.session-token",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
   },
   pages: {
     signIn: "/login",

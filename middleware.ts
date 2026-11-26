@@ -14,6 +14,9 @@ export default withAuth(
     return NextResponse.next();
   },
   {
+    secret:
+      process.env.NEXTAUTH_SECRET ||
+      "priya-boutique-nathdwara-runtime-fallback-secret-2026",
     callbacks: {
       authorized: ({ token }) => !!token,
     },
