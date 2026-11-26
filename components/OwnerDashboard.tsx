@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   CssAlertIcon,
@@ -58,7 +58,13 @@ import type {
 
 export function OwnerDashboard() {
   const { showToast } = useToast();
+  const modulesSectionRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<TabKey>("Leads");
+
+  const jumpToTab = (tab: TabKey) => {
+    setActiveTab(tab);
+    modulesSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const [leadSummary, setLeadSummary] = useState({
     todayLeads: 4,
     pendingFollowups: 4,
@@ -500,16 +506,16 @@ export function OwnerDashboard() {
         {/* Quick-Action & Module Jump Bar */}
         <div className="flex flex-wrap items-center gap-2">
           <BoutiqueButton
-            variant="outline"
-            onClick={() => setActiveTab("Leads")}
+            variant={activeTab === "Leads" ? "primary" : "outline"}
+            onClick={() => jumpToTab("Leads")}
             className="py-1.5 px-3.5 text-xs"
           >
             <CssDiamondIcon />
             <span>Leads</span>
           </BoutiqueButton>
           <BoutiqueButton
-            variant="outline"
-            onClick={() => setActiveTab("Pipeline")}
+            variant={activeTab === "Pipeline" ? "primary" : "outline"}
+            onClick={() => jumpToTab("Pipeline")}
             className="py-1.5 px-3.5 text-xs"
           >
             <CssGridIcon />
@@ -794,7 +800,9 @@ export function OwnerDashboard() {
         </BoutiqueCard>
       )}
 
-      <GoldDivider label="Showroom Command Center" />
+      <div ref={modulesSectionRef} className="scroll-mt-24">
+        <GoldDivider label="Showroom Command Center" />
+      </div>
 
       {/* Sidebar + Main Content Layout */}
       <div className="flex flex-col lg:flex-row gap-6 items-start">
