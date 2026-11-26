@@ -6,7 +6,9 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Seeding Priya Boutique CRM database...");
 
-  const passwordHash = await bcrypt.hash("123456", 10);
+  const ownerHash = await bcrypt.hash("Priya@Boutique#2026", 12);
+  const rajuHash = await bcrypt.hash("Raju@Staff#2026", 12);
+  const poojaHash = await bcrypt.hash("Pooja@Staff#2026", 12);
 
   // 1. Seed Staff (Owner Priya, Staff Raju & Pooja)
   const priya = await prisma.staff.upsert({
@@ -16,7 +18,7 @@ async function main() {
       name: "Priya",
       phone: "9829012345",
       email: "owner@priya.com",
-      passwordHash,
+      passwordHash: ownerHash,
       role: UserRole.OWNER,
       target_monthly: 250000,
       commission_percent: 0,
@@ -31,7 +33,7 @@ async function main() {
       name: "Raju",
       phone: "9829012346",
       email: "raju@priya.com",
-      passwordHash,
+      passwordHash: rajuHash,
       role: UserRole.STAFF,
       target_monthly: 100000,
       commission_percent: 2,
@@ -46,7 +48,7 @@ async function main() {
       name: "Pooja",
       phone: "9829012347",
       email: "pooja@priya.com",
-      passwordHash,
+      passwordHash: poojaHash,
       role: UserRole.STAFF,
       target_monthly: 100000,
       commission_percent: 2,

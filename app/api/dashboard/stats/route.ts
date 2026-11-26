@@ -2,8 +2,13 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { daysSince, isSameOrTomorrowMonthDay } from "@/lib/utils";
 import { demoStore } from "@/lib/demo-store";
+import { requireSession } from "@/lib/security";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
+  const { error } = await requireSession("OWNER");
+  if (error) return error;
   try {
     const now = new Date();
     const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());

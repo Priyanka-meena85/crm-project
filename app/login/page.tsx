@@ -18,7 +18,8 @@ export default function LoginPage() {
   const router = useRouter();
   const { showToast } = useToast();
   const [email, setEmail] = useState("owner@priya.com");
-  const [password, setPassword] = useState("123456");
+  const [password, setPassword] = useState("Priya@Boutique#2026");
+  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (loginEmail: string, loginPass: string) => {
@@ -27,6 +28,7 @@ export default function LoginPage() {
       const res = await signIn("credentials", {
         email: loginEmail,
         password: loginPass,
+        otp,
         redirect: false,
       });
 
@@ -162,8 +164,8 @@ export default function LoginPage() {
               disabled={loading}
               onClick={() => {
                 setEmail("owner@priya.com");
-                setPassword("123456");
-                handleLogin("owner@priya.com", "123456");
+                setPassword("Priya@Boutique#2026");
+                handleLogin("owner@priya.com", "Priya@Boutique#2026");
               }}
               className="w-full text-xs py-2.5"
             >
@@ -176,8 +178,8 @@ export default function LoginPage() {
               disabled={loading}
               onClick={() => {
                 setEmail("raju@priya.com");
-                setPassword("123456");
-                handleLogin("raju@priya.com", "123456");
+                setPassword("Raju@Staff#2026");
+                handleLogin("raju@priya.com", "Raju@Staff#2026");
               }}
               className="w-full text-xs py-2.5"
             >
@@ -186,8 +188,18 @@ export default function LoginPage() {
             </BoutiqueButton>
           </div>
 
-          <p className="mt-4 text-center text-[11px] text-charcoal/65">
-            Demo: owner@priya.com / 123456 • raju@priya.com / 123456
+          <div className="mt-4">
+            <input
+              type="text"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              placeholder="2FA OTP (Optional - if MFA enabled)"
+              className="w-full rounded-full border border-gold/30 bg-white/80 px-4 py-1.5 text-center text-xs outline-none focus:border-maroon"
+            />
+          </div>
+
+          <p className="mt-3 text-center text-[11px] text-charcoal/65">
+            Demo: owner@priya.com / Priya@Boutique#2026 • raju@priya.com / Raju@Staff#2026
           </p>
         </div>
       </motion.div>

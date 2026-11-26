@@ -1,11 +1,22 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import {
+  checkRateLimit,
+  safeLogError,
+  sanitizeText,
+  verifyCsrfOrigin,
+} from "@/lib/security";
 
 export async function POST(request: Request) {
+  if (!verifyCsrfOrigin(request)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
+
   try {
     const body = await request.json();
-    const { email, password } = body;
+    const email = sanitizeText(body?.email, 120).toLowerCase();
+    const password = typeof body?.password === "string" ? body.password : "";
 
     if (!email || !password) {
       return NextResponse.json(
@@ -14,21 +25,29 @@ export async function POST(request: Request) {
       );
     }
 
+    const rl = checkRateLimit(`api-login:${email}`, 10, 15 * 60 * 1000);
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: "Too many login attempts. 15 minutes baad try karein." },
+        { status: 429 }
+      );
+    }
+
     const staff = await prisma.staff.findUnique({
-      where: { email: String(email).toLowerCase().trim() },
+      where: { email },
     });
 
     if (!staff) {
       return NextResponse.json(
-        { error: "User nahi mila. Email check karein." },
+        { error: "Invalid credentials." },
         { status: 401 }
       );
     }
 
-    const valid = await bcrypt.compare(String(password), staff.passwordHash);
+    const valid = await bcrypt.compare(password, staff.passwordHash);
     if (!valid) {
       return NextResponse.json(
-        { error: "Galat password! Dobara try karein." },
+        { error: "Invalid credentials." },
         { status: 401 }
       );
     }
@@ -42,9 +61,9 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    console.error("Login API error:", error);
+    safeLogError("Login API", error);
     return NextResponse.json(
-      { error: "Login failed. Database connection check karein." },
+      { error: "Authentication service error." },
       { status: 500 }
     );
   }

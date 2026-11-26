@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { demoStore } from "@/lib/demo-store";
+import { requireSession } from "@/lib/security";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
+  const { error } = await requireSession("OWNER");
+  if (error) return error;
   try {
     const [bills, customers, products, staff, udhaars] = await Promise.all([
       prisma.bill.findMany({
