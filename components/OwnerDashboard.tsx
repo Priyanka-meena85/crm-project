@@ -470,6 +470,7 @@ export function OwnerDashboard() {
   };
 
   const tabs: { key: TabKey; icon: React.ReactNode }[] = [
+    { key: "Dashboard", icon: <CssGridIcon /> },
     { key: "Leads", icon: <CssDiamondIcon /> },
     { key: "Pipeline", icon: <CssGridIcon /> },
     { key: "Follow-ups", icon: <CssBellIcon /> },
@@ -823,6 +824,74 @@ export function OwnerDashboard() {
           exit={{ opacity: 0, x: -30 }}
           transition={{ duration: 0.25 }}
         >
+          {/* TAB 0: DASHBOARD OVERVIEW */}
+          {activeTab === "Dashboard" && (
+            <BoutiqueCard>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="font-serif text-xl font-bold text-maroon">
+                    Showroom Dashboard Overview
+                  </h3>
+                  <p className="text-xs text-charcoal/70">
+                    Aaj ki highlights aur 1-click module shortcuts
+                  </p>
+                </div>
+                <span className="rounded-full bg-softpink px-3 py-1 text-xs font-bold text-maroon border border-gold/35">
+                  Live Status: Active
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {[
+                  {
+                    title: "Leads & Follow-ups",
+                    desc: `${leadSummary.todayLeads} Aaj ki leads • ${leadSummary.pendingFollowups} pending`,
+                    tab: "Leads" as TabKey,
+                  },
+                  {
+                    title: "Kanban Pipeline",
+                    desc: `${leadSummary.monthlyPakki} Deals PAKKI is mahine`,
+                    tab: "Pipeline" as TabKey,
+                  },
+                  {
+                    title: "Customers 360°",
+                    desc: `${stats.totalCustomers} Total • VIP & Inactive alerts`,
+                    tab: "Customers" as TabKey,
+                  },
+                  {
+                    title: "Stock & Inventory",
+                    desc: `${stats.lowStockCount} Low Stock items dhyan dene wale`,
+                    tab: "Stock" as TabKey,
+                  },
+                  {
+                    title: "Udhaar Register",
+                    desc: `${formatINR(stats.udhaarBaki)} vasooli baki hai`,
+                    tab: "Udhaar" as TabKey,
+                  },
+                  {
+                    title: "Reports & Analytics",
+                    desc: `Aaj ki Sale ${formatINR(stats.aajKiSale)}`,
+                    tab: "Reports" as TabKey,
+                  },
+                ].map((card) => (
+                  <button
+                    key={card.title}
+                    type="button"
+                    onClick={() => jumpToTab(card.tab)}
+                    className="text-left rounded-2xl bg-ivory/75 hover:bg-softpink/70 p-4 border border-gold/35 hover:border-maroon transition-all"
+                  >
+                    <p className="font-serif font-bold text-sm text-maroon">
+                      {card.title}
+                    </p>
+                    <p className="text-xs text-charcoal/75 mt-1">{card.desc}</p>
+                    <p className="text-[11px] font-bold text-gold mt-2">
+                      Open {card.tab} &rarr;
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </BoutiqueCard>
+          )}
+
           {/* TAB 1: CUSTOMERS */}
           {activeTab === "Customers" && (
             <BoutiqueCard>
@@ -974,7 +1043,7 @@ export function OwnerDashboard() {
               </div>
 
               <div className="flex flex-wrap gap-2 mb-4">
-                {["All", "Kurti", "Saree", "Lehenga", "Suit", "Gown"].map((cat) => (
+                {["All", "Kurti", "Saree", "Lehenga", "Suit", "Gown", "Dupatta", "Blouse", "Kurta"].map((cat) => (
                   <button
                     key={cat}
                     type="button"
@@ -1631,7 +1700,7 @@ export function OwnerDashboard() {
               }
               className="w-full rounded-full border border-gold/40 bg-white px-4 py-2 text-sm outline-none"
             >
-              {["Kurti", "Saree", "Lehenga", "Suit", "Gown"].map((c) => (
+              {["Kurti", "Saree", "Lehenga", "Suit", "Gown", "Dupatta", "Blouse", "Kurta"].map((c) => (
                 <option key={c} value={c}>
                   {c}
                 </option>

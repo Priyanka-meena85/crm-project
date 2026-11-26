@@ -18,6 +18,9 @@ enum ProductCategory {
   Lehenga
   Suit
   Gown
+  Dupatta
+  Blouse
+  Kurta
 }
 
 enum PaymentMethod {

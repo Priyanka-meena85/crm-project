@@ -33,12 +33,12 @@ export function DashboardSidebar({
       <div className="flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 snap-x snap-mandatory">
         {tabs.map((tab, idx) => (
           <React.Fragment key={tab.key}>
-            {idx === 6 && (
+            {idx === 7 && (
               <p className="hidden lg:block px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
                 Showroom Ops
               </p>
             )}
-            {idx === 11 && (
+            {idx === 12 && (
               <p className="hidden lg:block px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
                 Reports & Setup
               </p>

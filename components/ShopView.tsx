@@ -607,7 +607,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
               />
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {["All", "Kurti", "Saree", "Lehenga", "Suit", "Gown"].map((cat) => (
+              {["All", "Kurti", "Saree", "Lehenga", "Suit", "Gown", "Dupatta", "Blouse", "Kurta"].map((cat) => (
                 <button
                   key={cat}
                   type="button"
@@ -901,7 +901,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
           </div>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            {["All", "Kurti", "Saree", "Lehenga", "Suit", "Gown"].map((cat) => (
+            {["All", "Kurti", "Saree", "Lehenga", "Suit", "Gown", "Dupatta", "Blouse", "Kurta"].map((cat) => (
               <button
                 key={cat}
                 type="button"

@@ -1,4 +1,5 @@
 export type TabKey =
+  | "Dashboard"
   | "Leads"
   | "Pipeline"
   | "Follow-ups"
