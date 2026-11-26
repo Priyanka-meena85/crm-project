@@ -55,7 +55,7 @@ export function FloatingGoldDots() {
 /* Marquee Strip */
 export function MarqueeStrip() {
   const text =
-    "Diwali Offer • New Stock Aaya Hai • VIP Customer • Priya Boutique Nathdwara • Shaadi Season Special • ";
+    "Festive Collection Live • New Arrivals • VIP Client Concierge • Priya Boutique Nathdwara • Bridal Couture Studio • ";
 
   return (
     <div className="relative z-30 overflow-hidden bg-gradient-to-r from-maroon via-maroon-light to-maroon text-ivory py-1.5 border-b border-gold/40">

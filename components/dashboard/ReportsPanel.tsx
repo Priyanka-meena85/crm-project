@@ -21,10 +21,10 @@ export function ReportsPanel({ reports }: { reports: ReportsData }) {
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <div>
             <h3 className="font-serif text-xl font-bold text-maroon">
-              Weekly Sale Trend (Interactive)
+              Weekly Sales Trend (Interactive)
             </h3>
             <p className="text-xs text-charcoal/70">
-              Is hafte ki rozana showroom sale
+              Daily showroom revenue performance this week
             </p>
           </div>
           <span className="rounded-full bg-softpink px-3.5 py-1 text-xs font-bold text-maroon border border-gold/40">
@@ -39,7 +39,7 @@ export function ReportsPanel({ reports }: { reports: ReportsData }) {
             { day: "Thu", val: 41000 },
             { day: "Fri", val: 38000 },
             { day: "Sat", val: 52000 },
-            { day: "Aaj", val: reports.dailySale },
+            { day: "Today", val: reports.dailySale },
           ].map((bar, idx) => {
             const maxVal = Math.max(55000, reports.dailySale);
             const hPct = Math.max(15, Math.round((bar.val / maxVal) * 100));
@@ -56,7 +56,7 @@ export function ReportsPanel({ reports }: { reports: ReportsData }) {
                   animate={{ height: `${hPct}%` }}
                   transition={{ duration: 0.7, delay: idx * 0.06 }}
                   className={`w-full max-w-[44px] rounded-t-2xl transition-colors ${
-                    bar.day === "Aaj"
+                    bar.day === "Today"
                       ? "bg-gradient-to-t from-maroon to-gold-shine shadow-gold-glow"
                       : "bg-gradient-to-t from-maroon/80 to-maroon-light/80 group-hover:from-maroon group-hover:to-gold"
                   }`}
@@ -80,7 +80,7 @@ export function ReportsPanel({ reports }: { reports: ReportsData }) {
               { label: "UPI", val: reports.paymentBreakdown.UPI, color: "bg-green-600" },
               { label: "Cash", val: reports.paymentBreakdown.Cash, color: "bg-maroon" },
               { label: "Card", val: reports.paymentBreakdown.Card, color: "bg-gold" },
-              { label: "Udhaar", val: reports.paymentBreakdown.Udhaar, color: "bg-red-600" },
+              { label: "Credit", val: reports.paymentBreakdown.Udhaar, color: "bg-red-600" },
             ].map((pm) => {
               const pct = Math.round((pm.val / totalPayment) * 100);
               return (

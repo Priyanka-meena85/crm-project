@@ -68,8 +68,8 @@ export function SettingsPanel({
           Data Backup & Security
         </h3>
         <p className="text-xs text-charcoal/75 mb-4">
-          Aapka saara data PostgreSQL + LocalStorage backup me surakshit rehta
-          hai. Owner-only dashboard protection active hai.
+          All showroom data is securely backed up across PostgreSQL and local
+          storage with strict Owner-only dashboard protection.
         </p>
         <BoutiqueButton variant="gold" onClick={onDownloadBackup}>
           <CssDownloadIcon />

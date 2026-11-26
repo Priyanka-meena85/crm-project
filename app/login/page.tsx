@@ -33,12 +33,12 @@ export default function LoginPage() {
       });
 
       if (res?.error) {
-        showToast("Galat email ya password!", "error");
+        showToast("Invalid email, password, or OTP!", "error");
         setLoading(false);
         return;
       }
 
-      showToast("Swagat hai Priya Boutique CRM me!");
+      showToast("Welcome to Priya Boutique CRM!");
       if (loginEmail.toLowerCase().includes("owner")) {
         router.push("/dashboard");
       } else {
@@ -46,7 +46,7 @@ export default function LoginPage() {
       }
       router.refresh();
     } catch {
-      showToast("Login me dikkat aayi.", "error");
+      showToast("Unable to sign in. Please try again.", "error");
     } finally {
       setLoading(false);
     }
@@ -71,15 +71,15 @@ export default function LoginPage() {
               Priya Boutique CRM
             </h1>
             <p className="text-sm text-gold-soft/90 leading-relaxed">
-              &ldquo;Customer Kabhi Nahi Bhoolega, Sale Kabhi Nahi Rukegi&rdquo;
+              &ldquo;Every Client Remembered, Every Sale Elevated&rdquo;
             </p>
           </div>
 
           <div className="mt-8 space-y-3 relative z-10 text-xs text-gold-soft/95">
             {[
-              "3-Step Fast Billing + Gold Confetti + PDF",
-              "VIP Customer DNA, Size & Alteration Diary",
-              "Kanban Pipeline, Follow-ups & 24x7 AI",
+              "3-Step Express Billing, PDF Invoices & Celebrations",
+              "VIP Client DNA, Sizing & Alteration Registry",
+              "Kanban Sales Pipeline, Follow-ups & 24x7 AI Concierge",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-shine/20 text-gold-shine border border-gold-shine/40">
@@ -94,13 +94,13 @@ export default function LoginPage() {
         {/* Right Login Form */}
         <div className="lg:col-span-7 p-6 sm:p-10 bg-ivory/60">
           <h2 className="font-serif text-2xl font-bold text-maroon">
-            Dukaan Login
+            Showroom Sign In
           </h2>
           <p className="text-xs text-charcoal/70 mt-1">
-            Owner ya Staff account se login karein
+            Sign in with your Owner or Staff credentials
           </p>
 
-          <GoldDivider label="Account Details" />
+          <GoldDivider label="Account Credentials" />
 
           <form
             onSubmit={(e) => {
@@ -152,7 +152,7 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full py-3 text-base"
             >
-              {loading ? "Login Ho Raha Hai..." : "Andar Aayein"}
+              {loading ? "Signing In..." : "Sign In"}
             </BoutiqueButton>
           </form>
 

@@ -140,7 +140,7 @@ export function LeadsWorkspace({
       body: JSON.stringify(leadForm),
     });
     if (res.ok) {
-      showToast("Nayi Lead Save Ho Gayi!");
+      showToast("New lead saved successfully!");
       setAddLeadOpen(false);
       setLeadForm({
         naam: "",
