@@ -12,7 +12,6 @@ import {
   CssCrownIcon,
   CssDiamondIcon,
   CssDocIcon,
-  CssDownloadIcon,
   CssEditIcon,
   CssGearIcon,
   CssGridIcon,
@@ -42,120 +41,20 @@ import {
 import { useToast } from "@/components/Providers";
 import { formatINR } from "@/lib/utils";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
-
-type TabKey =
-  | "Leads"
-  | "Pipeline"
-  | "Follow-ups"
-  | "Customers"
-  | "Omnichannel"
-  | "Inbox"
-  | "Stock"
-  | "Staff"
-  | "Marketing"
-  | "Udhaar"
-  | "Measurement"
-  | "Reports"
-  | "Integrations"
-  | "Settings";
-
-interface DashboardAlert {
-  id: string;
-  type: "birthday" | "inactive" | "low_stock";
-  title: string;
-  actionLabel: string;
-  phone?: string;
-  customerName?: string;
-}
-
-interface StatsData {
-  aajKiSale: number;
-  isMahineKiSale: number;
-  totalCustomers: number;
-  nayeCustomer: number;
-  topSellingItem: string;
-  udhaarBaki: number;
-  lowStockCount: number;
-  aajCustomerAaye: number;
-  alerts: DashboardAlert[];
-}
-
-interface CustomerRow {
-  id: string;
-  name: string;
-  phone: string;
-  city: string;
-  size: string;
-  pasand: string;
-  total_kharida: number;
-  lastItem: string;
-  is_vip: boolean;
-  is_inactive: boolean;
-}
-
-interface ProductRow {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  photo_url: string;
-  stocks: {
-    id: string;
-    size: string;
-    quantity: number;
-    low_stock_threshold: number;
-  }[];
-}
-
-interface StaffRow {
-  id: string;
-  name: string;
-  phone: string;
-  email: string;
-  role: string;
-  target_monthly: number;
-  commission_percent: number;
-  current_sale: number;
-  attendance?: "Present" | "Absent" | "Half Day";
-}
-
-interface UdhaarRow {
-  id: string;
-  amount: number;
-  due_date: string;
-  status: "Pending" | "Paid";
-  customer: { name: string; phone: string };
-}
-
-interface MeasurementRow {
-  id: string;
-  blouse: string;
-  sleeve: string;
-  length: string;
-  waist: string;
-  shoulder: string;
-  status: string;
-  delivery_date: string | null;
-  customer: { id: string; name: string; phone: string };
-}
-
-interface CampaignRow {
-  id: string;
-  title: string;
-  template: string;
-  sent_to_count: number;
-  createdAt: string;
-}
-
-interface ReportsData {
-  dailySale: number;
-  monthlySale: number;
-  totalBills: number;
-  paymentBreakdown: { Cash: number; UPI: number; Card: number; Udhaar: number };
-  itemReport: { name: string; qty: number; revenue: number }[];
-  staffReport: { name: string; role: string; sale: number; target: number }[];
-  customerReport: { name: string; phone: string; total: number; is_vip: boolean }[];
-}
+import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
+import { ReportsPanel } from "@/components/dashboard/ReportsPanel";
+import { SettingsPanel } from "@/components/dashboard/SettingsPanel";
+import type {
+  CampaignRow,
+  CustomerRow,
+  MeasurementRow,
+  ProductRow,
+  ReportsData,
+  StaffRow,
+  StatsData,
+  TabKey,
+  UdhaarRow,
+} from "@/types/crm";
 
 export function OwnerDashboard() {
   const { showToast } = useToast();
@@ -899,40 +798,11 @@ export function OwnerDashboard() {
 
       {/* Sidebar + Main Content Layout */}
       <div className="flex flex-col lg:flex-row gap-6 items-start">
-        {/* Sticky Left Sidebar (Desktop) & Horizontal Scroll Strip (Mobile) */}
-        <aside className="w-full lg:w-64 shrink-0 lg:sticky lg:top-20 rounded-[28px] bg-white/90 backdrop-blur-md p-3 sm:p-4 shadow-boutique border border-gold/40">
-          <p className="hidden lg:block px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-            CRM & Leads
-          </p>
-          <div className="flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
-            {tabs.map((tab, idx) => (
-              <React.Fragment key={tab.key}>
-                {idx === 6 && (
-                  <p className="hidden lg:block px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-                    Showroom Ops
-                  </p>
-                )}
-                {idx === 11 && (
-                  <p className="hidden lg:block px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
-                    Reports & Setup
-                  </p>
-                )}
-                <button
-                  type="button"
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`shrink-0 inline-flex lg:w-full items-center gap-2.5 rounded-full lg:rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-semibold border transition-all ${
-                    activeTab === tab.key
-                      ? "bg-gradient-to-r from-maroon to-maroon-light text-white border-gold shadow-gold-glow"
-                      : "bg-ivory/60 text-charcoal border-transparent hover:border-gold/50 hover:bg-softpink/60"
-                  }`}
-                >
-                  {tab.icon}
-                  <span>{tab.key}</span>
-                </button>
-              </React.Fragment>
-            ))}
-          </div>
-        </aside>
+        <DashboardSidebar
+          tabs={tabs}
+          activeTab={activeTab}
+          onSelect={setActiveTab}
+        />
 
         {/* Main Content Area */}
         <div className="w-full flex-1 min-w-0">
@@ -1619,233 +1489,17 @@ export function OwnerDashboard() {
 
           {/* TAB 7: REPORTS */}
           {activeTab === "Reports" && reports && (
-            <div className="space-y-5">
-              {/* Interactive Weekly Sales Bar Chart */}
-              <BoutiqueCard>
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <div>
-                    <h3 className="font-serif text-xl font-bold text-maroon">
-                      Weekly Sale Trend (Interactive)
-                    </h3>
-                    <p className="text-xs text-charcoal/70">
-                      Is hafte ki rozana showroom sale
-                    </p>
-                  </div>
-                  <span className="rounded-full bg-softpink px-3.5 py-1 text-xs font-bold text-maroon border border-gold/40">
-                    Monthly: {formatINR(reports.monthlySale)}
-                  </span>
-                </div>
-                <div className="grid grid-cols-7 gap-2 sm:gap-4 items-end h-44 pt-4">
-                  {[
-                    { day: "Mon", val: 28000 },
-                    { day: "Tue", val: 34000 },
-                    { day: "Wed", val: 22000 },
-                    { day: "Thu", val: 41000 },
-                    { day: "Fri", val: 38000 },
-                    { day: "Sat", val: 52000 },
-                    { day: "Aaj", val: reports.dailySale },
-                  ].map((bar, idx) => {
-                    const maxVal = Math.max(55000, reports.dailySale);
-                    const hPct = Math.max(15, Math.round((bar.val / maxVal) * 100));
-                    return (
-                      <div
-                        key={bar.day}
-                        className="group flex flex-col items-center h-full justify-end gap-1.5"
-                      >
-                        <span className="text-[10px] font-bold text-maroon opacity-0 group-hover:opacity-100 transition-opacity">
-                          {formatINR(bar.val)}
-                        </span>
-                        <motion.div
-                          initial={{ height: 0 }}
-                          animate={{ height: `${hPct}%` }}
-                          transition={{ duration: 0.7, delay: idx * 0.06 }}
-                          className={`w-full max-w-[44px] rounded-t-2xl transition-colors ${
-                            bar.day === "Aaj"
-                              ? "bg-gradient-to-t from-maroon to-gold-shine shadow-gold-glow"
-                              : "bg-gradient-to-t from-maroon/80 to-maroon-light/80 group-hover:from-maroon group-hover:to-gold"
-                          }`}
-                        />
-                        <span className="text-xs font-semibold text-charcoal/80">
-                          {bar.day}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </BoutiqueCard>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <BoutiqueCard>
-                  <h3 className="font-serif text-lg font-bold text-maroon mb-3">
-                    Daily & Payment Mode Split
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    {[
-                      { label: "UPI", val: reports.paymentBreakdown.UPI, color: "bg-green-600" },
-                      { label: "Cash", val: reports.paymentBreakdown.Cash, color: "bg-maroon" },
-                      { label: "Card", val: reports.paymentBreakdown.Card, color: "bg-gold" },
-                      { label: "Udhaar", val: reports.paymentBreakdown.Udhaar, color: "bg-red-600" },
-                    ].map((pm) => {
-                      const sum = Math.max(
-                        1,
-                        reports.paymentBreakdown.UPI +
-                          reports.paymentBreakdown.Cash +
-                          reports.paymentBreakdown.Card +
-                          reports.paymentBreakdown.Udhaar
-                      );
-                      const pct = Math.round((pm.val / sum) * 100);
-                      return (
-                        <div key={pm.label} className="space-y-1">
-                          <div className="flex justify-between text-xs font-semibold">
-                            <span>{pm.label}</span>
-                            <span>
-                              {formatINR(pm.val)} ({pct}%)
-                            </span>
-                          </div>
-                          <div className="h-2.5 w-full rounded-full bg-ivory overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${pct}%` }}
-                              transition={{ duration: 0.8 }}
-                              className={`h-full rounded-full ${pm.color}`}
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </BoutiqueCard>
-
-                <BoutiqueCard>
-                  <h3 className="font-serif text-lg font-bold text-maroon mb-3">
-                    Item Wise Best Sellers
-                  </h3>
-                  <div className="space-y-2.5 text-sm">
-                    {reports.itemReport.map((item) => (
-                      <div
-                        key={item.name}
-                        className="flex justify-between rounded-xl bg-ivory/70 px-3 py-2 border border-gold/25"
-                      >
-                        <span>
-                          {item.name} ({item.qty} pcs)
-                        </span>
-                        <strong className="text-maroon">
-                          {formatINR(item.revenue)}
-                        </strong>
-                      </div>
-                    ))}
-                  </div>
-                </BoutiqueCard>
-
-                <BoutiqueCard>
-                  <h3 className="font-serif text-lg font-bold text-maroon mb-3">
-                    Staff Wise Sale Report
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    {reports.staffReport.map((s) => (
-                      <div
-                        key={s.name}
-                        className="flex justify-between rounded-xl bg-ivory/70 px-3 py-2 border border-gold/25"
-                      >
-                        <span>
-                          {s.name} ({s.role})
-                        </span>
-                        <strong className="text-maroon">
-                          {formatINR(s.sale)} / {formatINR(s.target)}
-                        </strong>
-                      </div>
-                    ))}
-                  </div>
-                </BoutiqueCard>
-
-                <BoutiqueCard>
-                  <h3 className="font-serif text-lg font-bold text-maroon mb-3">
-                    Top Customers Report
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    {reports.customerReport.map((c) => (
-                      <div
-                        key={c.phone}
-                        className="flex justify-between rounded-xl bg-ivory/70 px-3 py-2 border border-gold/25"
-                      >
-                        <span>
-                          {c.name} {c.is_vip ? "👑" : ""}
-                        </span>
-                        <strong className="text-maroon">
-                          {formatINR(c.total)}
-                        </strong>
-                      </div>
-                    ))}
-                  </div>
-                </BoutiqueCard>
-              </div>
-            </div>
+            <ReportsPanel reports={reports} />
           )}
 
           {/* TAB 8: SETTINGS & BACKUP */}
           {activeTab === "Settings" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <BoutiqueCard>
-                <h3 className="font-serif text-xl font-bold text-maroon mb-4">
-                  Shop Profile Settings
-                </h3>
-                <form onSubmit={handleSaveSettings} className="space-y-3">
-                  <input
-                    type="text"
-                    value={shopProfile.name}
-                    onChange={(e) =>
-                      setShopProfile((p) => ({ ...p, name: e.target.value }))
-                    }
-                    placeholder="Shop Name"
-                    className="w-full rounded-full border border-gold/40 bg-ivory px-4 py-2 text-sm outline-none"
-                  />
-                  <input
-                    type="text"
-                    value={shopProfile.address}
-                    onChange={(e) =>
-                      setShopProfile((p) => ({ ...p, address: e.target.value }))
-                    }
-                    placeholder="Shop Address"
-                    className="w-full rounded-full border border-gold/40 bg-ivory px-4 py-2 text-sm outline-none"
-                  />
-                  <input
-                    type="text"
-                    value={shopProfile.phone}
-                    onChange={(e) =>
-                      setShopProfile((p) => ({ ...p, phone: e.target.value }))
-                    }
-                    placeholder="Shop Phone"
-                    className="w-full rounded-full border border-gold/40 bg-ivory px-4 py-2 text-sm outline-none"
-                  />
-                  <input
-                    type="text"
-                    value={shopProfile.tagline}
-                    onChange={(e) =>
-                      setShopProfile((p) => ({ ...p, tagline: e.target.value }))
-                    }
-                    placeholder="Tagline"
-                    className="w-full rounded-full border border-gold/40 bg-ivory px-4 py-2 text-sm outline-none"
-                  />
-                  <BoutiqueButton type="submit">
-                    Save Shop Profile
-                  </BoutiqueButton>
-                </form>
-              </BoutiqueCard>
-
-              <BoutiqueCard>
-                <h3 className="font-serif text-xl font-bold text-maroon mb-2">
-                  Data Backup & Security
-                </h3>
-                <p className="text-xs text-charcoal/75 mb-4">
-                  Aapka saara data PostgreSQL + LocalStorage backup me surakshit
-                  rehta hai. Owner-only dashboard protection active hai.
-                </p>
-                <BoutiqueButton variant="gold" onClick={handleDownloadBackup}>
-                  <CssDownloadIcon />
-                  <span>Download Full JSON Backup</span>
-                </BoutiqueButton>
-              </BoutiqueCard>
-            </div>
+            <SettingsPanel
+              shopProfile={shopProfile}
+              onChangeProfile={setShopProfile}
+              onSaveProfile={handleSaveSettings}
+              onDownloadBackup={handleDownloadBackup}
+            />
           )}
         </motion.div>
       </AnimatePresence>
