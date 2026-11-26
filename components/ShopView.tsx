@@ -76,6 +76,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
   const { showToast } = useToast();
   const stockSectionRef = useRef<HTMLDivElement>(null);
   const billingSectionRef = useRef<HTMLDivElement>(null);
+  const billSummaryRef = useRef<HTMLDivElement>(null);
 
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
@@ -709,7 +710,8 @@ export function ShopView({ staffId }: { staffId?: string }) {
         </BoutiqueCard>
 
         {/* Column 3: Bill Summary */}
-        <BoutiqueCard className="lg:col-span-4" delay={0.14}>
+        <div ref={billSummaryRef} className="lg:col-span-4">
+        <BoutiqueCard delay={0.14}>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-serif text-lg font-bold text-maroon">
               3. Bill Summary
@@ -867,6 +869,7 @@ export function ShopView({ staffId }: { staffId?: string }) {
             </BoutiqueButton>
           </div>
         </BoutiqueCard>
+        </div>
       </div>
 
       <GoldDivider label="2-Second Stock Check" />
@@ -1230,6 +1233,35 @@ export function ShopView({ staffId }: { staffId?: string }) {
           )}
         </div>
       </BoutiqueModal>
+      {/* Mobile Sticky Bottom Cart Bar */}
+      <AnimatePresence>
+        {cart.length > 0 && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            className="lg:hidden fixed bottom-3 left-3 right-3 z-40 rounded-full bg-gradient-to-r from-maroon to-maroon-light text-white px-4 py-2.5 shadow-boutique-hover border border-gold-shine/60 flex items-center justify-between gap-3"
+          >
+            <div className="text-xs leading-tight">
+              <p className="font-bold text-gold-soft">
+                {cart.reduce((s, i) => s + i.qty, 0)} Items in Bill
+              </p>
+              <p className="font-serif text-base font-extrabold">
+                {formatINR(finalTotal)}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                billSummaryRef.current?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="rounded-full bg-gold-shine px-4 py-2 text-xs font-bold text-charcoal shadow-sm"
+            >
+              Bill Dekhein &rarr;
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

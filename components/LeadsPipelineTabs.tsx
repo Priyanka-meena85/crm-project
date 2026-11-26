@@ -813,7 +813,7 @@ export function HinglishAIChatbot() {
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-5 left-5 z-50 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-light px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-boutique-hover border border-gold-shine/60"
+        className="fixed bottom-4 left-4 z-50 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-maroon to-maroon-light px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-boutique-hover border border-gold-shine/60"
       >
         <CssDiamondIcon className="text-gold-shine" />
         <span>24x7 AI Assistant</span>

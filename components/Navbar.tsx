@@ -25,27 +25,39 @@ export function FloatingPillNavbar() {
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
-        className="flex flex-wrap items-center justify-between gap-3 rounded-full bg-white/80 backdrop-blur-xl px-4 sm:px-6 py-2.5 shadow-boutique border border-gold/35"
+        className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3 rounded-[28px] sm:rounded-full bg-white/85 backdrop-blur-xl px-4 sm:px-6 py-2.5 shadow-boutique border border-gold/35"
       >
-        <Link href="/shop" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-maroon-light text-gold-soft shadow-sm">
-            <CssDiamondIcon />
-          </div>
-          <div className="leading-tight">
-            <p className="font-serif text-sm sm:text-base font-bold text-maroon">
-              Priya Boutique
-            </p>
-            <p className="text-[10px] font-medium text-gold uppercase tracking-widest">
-              Nathdwara
-            </p>
-          </div>
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link href="/shop" className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-maroon-light text-gold-soft shadow-sm">
+              <CssDiamondIcon />
+            </div>
+            <div className="leading-tight">
+              <p className="font-serif text-sm sm:text-base font-bold text-maroon">
+                Priya Boutique
+              </p>
+              <p className="text-[10px] font-medium text-gold uppercase tracking-widest">
+                Nathdwara
+              </p>
+            </div>
+          </Link>
 
-        <div className="flex items-center gap-1.5 rounded-full bg-ivory/90 p-1 border border-gold/30">
+          <button
+            type="button"
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            title="Logout"
+            className="sm:hidden inline-flex items-center gap-1.5 rounded-full bg-ivory px-3 py-1.5 text-xs font-semibold text-maroon border border-gold/40 hover:bg-softpink transition-colors"
+          >
+            <CssArrowIcon />
+            <span>Logout</span>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 sm:flex items-center gap-1.5 rounded-full bg-ivory/90 p-1 border border-gold/30">
           <Link
             href="/shop"
             className={cn(
-              "relative flex items-center gap-1.5 rounded-full px-3.5 sm:px-5 py-1.5 text-xs sm:text-sm font-semibold transition-all",
+              "relative flex items-center justify-center gap-1.5 rounded-full px-3 sm:px-5 py-1.5 text-xs sm:text-sm font-semibold transition-all",
               pathname === "/shop"
                 ? "bg-gradient-to-r from-maroon to-maroon-light text-white shadow-gold-glow"
                 : "text-charcoal/75 hover:text-maroon"
@@ -59,7 +71,7 @@ export function FloatingPillNavbar() {
             <Link
               href="/dashboard"
               className={cn(
-                "relative flex items-center gap-1.5 rounded-full px-3.5 sm:px-5 py-1.5 text-xs sm:text-sm font-semibold transition-all",
+                "relative flex items-center justify-center gap-1.5 rounded-full px-3 sm:px-5 py-1.5 text-xs sm:text-sm font-semibold transition-all",
                 pathname === "/dashboard"
                   ? "bg-gradient-to-r from-maroon to-maroon-light text-white shadow-gold-glow"
                   : "text-charcoal/75 hover:text-maroon"
@@ -71,7 +83,7 @@ export function FloatingPillNavbar() {
           )}
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="hidden sm:flex items-center gap-2.5">
           <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-softpink px-3 py-1 text-xs font-semibold text-maroon border border-maroon/15">
             {userName} ({role})
           </span>
@@ -82,7 +94,7 @@ export function FloatingPillNavbar() {
             className="inline-flex items-center gap-1.5 rounded-full bg-ivory px-3 py-1.5 text-xs font-semibold text-maroon border border-gold/40 hover:bg-softpink transition-colors"
           >
             <CssArrowIcon />
-            <span className="hidden sm:inline">Logout</span>
+            <span>Logout</span>
           </button>
         </div>
       </motion.nav>

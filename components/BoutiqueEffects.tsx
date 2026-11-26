@@ -272,7 +272,7 @@ export function BoutiqueCard({
         scale: 1.015,
       }}
       className={cn(
-        "rounded-[28px] bg-white/90 backdrop-blur-md p-5 sm:p-6 shadow-boutique hover:shadow-boutique-hover border border-gold/25 hover:border-gold ring-1 ring-maroon/5 transition-all duration-300",
+        "rounded-[22px] sm:rounded-[28px] bg-white/90 backdrop-blur-md p-4 sm:p-6 shadow-boutique hover:shadow-boutique-hover border border-gold/25 hover:border-gold ring-1 ring-maroon/5 transition-all duration-300",
         className
       )}
     >
