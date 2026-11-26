@@ -33,9 +33,7 @@ export async function uploadProductPhoto(
 
   if (!cloudName || !apiKey || !apiSecret) {
     return {
-      url:
-        input ||
-        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80",
+      url: input || "/products/red-kurti.png",
       provider: "placeholder",
     };
   }

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="100%" stop-color="#FFF1F2"/>
+    </linearGradient>
+    <linearGradient id="velvet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9F1239"/>
+      <stop offset="55%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#4C0519"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CA8A04"/>
+      <stop offset="50%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg)"/>
+  <circle cx="300" cy="215" r="165" fill="#FECDD3" opacity="0.4"/>
+  <!-- Bodice -->
+  <path d="M245 75 L355 75 L340 165 L260 165 Z" fill="url(#velvet)"/>
+  <!-- Flared Velvet Gown Skirt -->
+  <path d="M260 165 L340 165 L445 390 C360 412, 240 412, 155 390 Z" fill="url(#velvet)"/>
+  <!-- Gold Waist & Hem Embroidery -->
+  <rect x="258" y="160" width="84" height="10" rx="4" fill="url(#gold)"/>
+  <path d="M155 376 C240 398, 360 398, 445 376 L445 390 C360 412, 240 412, 155 390 Z" fill="url(#gold)"/>
+  <text x="300" y="428" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#881337" letter-spacing="2">MAROON VELVET GOWN</text>
+</svg>

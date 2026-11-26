@@ -208,8 +208,7 @@ const productsList: DemoProduct[] = [
     name: "Red Kurti",
     category: "Kurti",
     price: 1200,
-    photo_url:
-      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80",
+    photo_url: "/products/red-kurti.png",
     stocks: [
       { id: "st-1", size: "S", quantity: 5, low_stock_threshold: 2 },
       { id: "st-2", size: "M", quantity: 1, low_stock_threshold: 2 },
@@ -222,8 +221,7 @@ const productsList: DemoProduct[] = [
     name: "Red Lehenga",
     category: "Lehenga",
     price: 15000,
-    photo_url:
-      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80",
+    photo_url: "/products/red-lehenga.png",
     stocks: [
       { id: "st-5", size: "S", quantity: 2, low_stock_threshold: 2 },
       { id: "st-6", size: "M", quantity: 3, low_stock_threshold: 2 },
@@ -235,8 +233,7 @@ const productsList: DemoProduct[] = [
     name: "Blue Saree",
     category: "Saree",
     price: 3500,
-    photo_url:
-      "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80",
+    photo_url: "/products/blue-saree.svg",
     stocks: [
       { id: "st-8", size: "M", quantity: 6, low_stock_threshold: 2 },
       { id: "st-9", size: "L", quantity: 4, low_stock_threshold: 2 },
@@ -247,8 +244,7 @@ const productsList: DemoProduct[] = [
     name: "Gold Anarkali Suit",
     category: "Suit",
     price: 4800,
-    photo_url:
-      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&q=80",
+    photo_url: "/products/gold-anarkali.png",
     stocks: [
       { id: "st-10", size: "S", quantity: 3, low_stock_threshold: 2 },
       { id: "st-11", size: "M", quantity: 1, low_stock_threshold: 2 },
@@ -260,8 +256,7 @@ const productsList: DemoProduct[] = [
     name: "Maroon Velvet Gown",
     category: "Gown",
     price: 8900,
-    photo_url:
-      "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80",
+    photo_url: "/products/maroon-gown.svg",
     stocks: [
       { id: "st-13", size: "M", quantity: 2, low_stock_threshold: 2 },
       { id: "st-14", size: "L", quantity: 2, low_stock_threshold: 2 },

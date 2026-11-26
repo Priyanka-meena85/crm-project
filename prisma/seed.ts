@@ -118,8 +118,7 @@ async function main() {
       name: "Red Kurti",
       category: ProductCategory.Kurti,
       price: 1200,
-      photo_url:
-        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80",
+      photo_url: "/products/red-kurti.png",
       stocks: [
         { size: "S", quantity: 5 },
         { size: "M", quantity: 1 },
@@ -131,8 +130,7 @@ async function main() {
       name: "Red Lehenga",
       category: ProductCategory.Lehenga,
       price: 15000,
-      photo_url:
-        "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80",
+      photo_url: "/products/red-lehenga.png",
       stocks: [
         { size: "S", quantity: 2 },
         { size: "M", quantity: 3 },
@@ -143,8 +141,7 @@ async function main() {
       name: "Blue Saree",
       category: ProductCategory.Saree,
       price: 3500,
-      photo_url:
-        "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80",
+      photo_url: "/products/blue-saree.svg",
       stocks: [
         { size: "M", quantity: 6 },
         { size: "L", quantity: 4 },
@@ -154,8 +151,7 @@ async function main() {
       name: "Gold Anarkali Suit",
       category: ProductCategory.Suit,
       price: 4800,
-      photo_url:
-        "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&q=80",
+      photo_url: "/products/gold-anarkali.png",
       stocks: [
         { size: "S", quantity: 3 },
         { size: "M", quantity: 1 },
@@ -166,8 +162,7 @@ async function main() {
       name: "Maroon Velvet Gown",
       category: ProductCategory.Gown,
       price: 8900,
-      photo_url:
-        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80",
+      photo_url: "/products/maroon-gown.svg",
       stocks: [
         { size: "M", quantity: 2 },
         { size: "L", quantity: 2 },
